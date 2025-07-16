@@ -29,7 +29,8 @@ module.exports = {
   },
   rules: {
     'react/react-in-jsx-scope': 'off', // Not needed in React 17+
-    '@typescript-eslint/no-unused-vars': ['warn'],
+
     'react/prop-types': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
   },
 };

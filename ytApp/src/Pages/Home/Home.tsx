@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.css';
 import SideBar from '../../Components/SideBar/SideBar';
 import Feed from '../../Components/Feed/Feed';
@@ -9,12 +9,23 @@ type HomeProps = {
 };
 
 const Home = ({ setSidebar, sidebar }: HomeProps) => {
+  // 1. Tạo state để lưu category
+  const [category, setCategory] = useState(0);
+
   return (
     <>
-      <SideBar sidebar={sidebar} />
-      <button onClick={() => setSidebar((prev) => !prev)}></button>
-      <div className={`container ${sidebar?"":'large-container'}`}>
-        <Feed/>
+      {/* 2. Truyền category và setCategory nếu cần cho Sidebar */}
+      <SideBar 
+        sidebar={sidebar} 
+        category={category} 
+        setCategory={setCategory} 
+      />
+
+      <button onClick={() => setSidebar((prev) => !prev)}>Toggle Sidebar</button>
+
+      <div className={`container ${sidebar ? '' : 'large-container'}`}>
+        {/* 3. Truyền category cho Feed */}
+        <Feed category={category} />
       </div>
     </>
   );

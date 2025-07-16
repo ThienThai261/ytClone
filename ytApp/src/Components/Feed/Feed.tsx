@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Feed.css'
 import thumnail1 from '../../assets/thumbnail1.png'
 import thumnail2 from '../../assets/thumbnail2.png'
@@ -9,106 +9,43 @@ import thumnail6 from '../../assets/thumbnail6.png'
 import thumnail7 from '../../assets/thumbnail7.png'
 import thumnail8 from '../../assets/thumbnail8.png'
 import { Link } from 'react-router-dom'
+import { API_KEY, value_converter } from '../../data'
+import moment from 'moment'
 
-const Feed = () => {
+type FeedProps = {
+  category: number;
+};
+
+const Feed = ({ category }: FeedProps) => {
+  const [data,setData] = useState([]);
+  const fetchData = async () => {
+    const videoList_url =  `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=VN&videoCategoryId=${category}&key=${API_KEY}`
+    await fetch(videoList_url).then(response=>response.json()).then(data =>setData(data.items))
+  }
+  useEffect(()=>{
+    fetchData();
+  },[category])
+
+
   return (
     <div className="feed">
- <Link to={`video/20/123`} className='card'>
-        <img src={thumnail1} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </Link>
-     <div className='card'>
-        <img src={thumnail2} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail3} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail4} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail5} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail6} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail7} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail8} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-<div className='card'>
-        <img src={thumnail1} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail2} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail3} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail4} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail5} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail6} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail7} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
-     <div className='card'>
-        <img src={thumnail8} alt="" />
-        <h2>Video title long</h2>
-        <h3>Hello</h3>
-        <p>10k view  $ bull ; 2 days ago</p>
-    </div>
+      {data.map((item,index)=>{
+        return(
+             <Link to={`video/${item.snippet.categoryId}/${item.id}`} className='card'>
+        <img src={item.snippet.thumbnails.medium.url} alt="" />
+        <h2 >{item.snippet.title}</h2>
+        <h3>{item.snippet.channelTitle}</h3>
+      <p>
+  {value_converter(item.statistics.viewCount)} views • {moment(item.snippet.publishedAt).fromNow()}
+</p>
+
+
+      </Link>
+        )
+      })}
+    
+     
+    
     </div>
    
   )
