@@ -2,8 +2,10 @@
     flex-basis: 69%;
 
 }
-.playVideo video{
+.playVideo iframe{
     width: 100%;
+    height: 37vw;
+
 }
 .playVideo h3{
     margin-top: 10px;
@@ -146,4 +148,22 @@ color: #5a5a5a;
   font-size: 13px;
   color: #555;
 }
+@media (max-width:900px){
+    .playVideo{
+      flex-basis: 100%;
+    }
+    .playVideo iframe{
+      width: 100%;
+      height: 50vw;
 
+    }
+    .description{
+      padding-left: 0;
+    }
+    .playVideo .playVideoInfo span{
+      margin-left: 0;
+      margin-right: 15px;
+      margin-top: 15px;
+      
+    }
+}

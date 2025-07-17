@@ -24,3 +24,10 @@
 .card p{
     font-size: 14px;
 }
+/* Feed.css */
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  color: #666;
+}

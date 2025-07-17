@@ -7,6 +7,7 @@ import moreIcon from '../../assets/more.png';
 import notificationIcon from '../../assets/notification.png';
 import profileIcon from '../../assets/user_profile.jpg';
 import './Navbar.css';
+import { Link } from 'react-router-dom';
 
 type NavbarProps = {
   setSidebar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,7 +23,7 @@ const Navbar = ({ setSidebar }: NavbarProps) => {
           src={menuIcon}
           alt=''
         />
-        <img className='logo' src={logo} alt='' />
+        <Link to='./'> <img className='logo' src={logo} alt='' /></Link>
       </div>
       <div className='nav-middle flex-div'>
         <div className='searchBox flex-div'>
