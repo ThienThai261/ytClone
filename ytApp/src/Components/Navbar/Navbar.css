@@ -37,6 +37,10 @@ nav{
     width: 35px;
     border-radius: 50%;
 }
+.userIcon > div {
+  transform: scale(0.9);
+  transform-origin: center;
+}
 @media (max-width :900px){
     .menuIcon {
         display: none;

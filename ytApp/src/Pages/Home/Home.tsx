@@ -15,11 +15,7 @@ const Home = ({ setSidebar, sidebar }: HomeProps) => {
   return (
     <>
       {/* 2. Truyền category và setCategory nếu cần cho Sidebar */}
-      <SideBar 
-        sidebar={sidebar} 
-        category={category} 
-        setCategory={setCategory} 
-      />
+      <SideBar sidebar={sidebar} category={category} setCategory={setCategory} />
 
       <button onClick={() => setSidebar((prev) => !prev)}>Toggle Sidebar</button>
 

@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+}
+
+.large-container {
+  margin-left: 0; /* or padding-left: 0 if your sidebar affects spacing */
+}
+
+.feed {
+  flex: 1;
+  padding: 20px;
+}
